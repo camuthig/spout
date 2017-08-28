@@ -4,3 +4,4 @@
 /tests/resources/generated
 /tests/coverage
 /vendor
+/.php_cs.cache
