@@ -79,7 +79,7 @@ class CachingStrategyFactory
      * and the amount of memory available.
      *
      * @param int|null $sharedStringsUniqueCount Number of unique shared strings (NULL if unknown)
-     * @param string|void $tempFolder Temporary folder where the temporary files to store shared strings will be stored
+     * @param string|null $tempFolder Temporary folder where the temporary files to store shared strings will be stored
      * @return CachingStrategyInterface The best caching strategy
      */
     public function getBestCachingStrategy($sharedStringsUniqueCount, $tempFolder = null)

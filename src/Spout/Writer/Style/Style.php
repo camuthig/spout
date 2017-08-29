@@ -270,7 +270,7 @@ class Style
     }
 
     /**
-     * @param bool|void $shouldWrap Should the text be wrapped
+     * @param bool $shouldWrap Should the text be wrapped
      * @return Style
      */
     public function setShouldWrapText($shouldWrap = true)

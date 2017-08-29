@@ -66,7 +66,7 @@ class ZipHelper
      *
      * @param string $rootFolderPath Path of the root folder that will be ignored in the archive tree.
      * @param string $localFilePath Path of the file to be added, under the root folder
-     * @param string|void $existingFileMode Controls what to do when trying to add an existing file
+     * @param string $existingFileMode Controls what to do when trying to add an existing file
      * @return void
      */
     public function addFileToArchive($rootFolderPath, $localFilePath, $existingFileMode = self::EXISTING_FILES_OVERWRITE)
@@ -89,7 +89,7 @@ class ZipHelper
      *
      * @param string $rootFolderPath Path of the root folder that will be ignored in the archive tree.
      * @param string $localFilePath Path of the file to be added, under the root folder
-     * @param string|void $existingFileMode Controls what to do when trying to add an existing file
+     * @param string $existingFileMode Controls what to do when trying to add an existing file
      * @return void
      */
     public function addUncompressedFileToArchive($rootFolderPath, $localFilePath, $existingFileMode = self::EXISTING_FILES_OVERWRITE)
@@ -141,7 +141,7 @@ class ZipHelper
 
     /**
      * @param string $folderPath Path to the folder to be zipped
-     * @param string|void $existingFileMode Controls what to do when trying to add an existing file
+     * @param string $existingFileMode Controls what to do when trying to add an existing file
      * @return void
      */
     public function addFolderToArchive($folderPath, $existingFileMode = self::EXISTING_FILES_OVERWRITE)

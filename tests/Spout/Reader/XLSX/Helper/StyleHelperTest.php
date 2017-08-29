@@ -11,8 +11,8 @@ class StyleHelperTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @param array|void $styleAttributes
-     * @param array|void $customNumberFormats
+     * @param array $styleAttributes
+     * @param array $customNumberFormats
      * @return StyleHelper
      */
     private function getStyleHelperMock($styleAttributes = [], $customNumberFormats = [])
