@@ -7,14 +7,12 @@ use Box\Spout\Common\Exception\IOException;
 /**
  * Class SharedStringsHelper
  * This class provides helper functions to write shared strings
- *
- * @package Box\Spout\Writer\XLSX\Helper
  */
 class SharedStringsHelper
 {
     const SHARED_STRINGS_FILE_NAME = 'sharedStrings.xml';
 
-    const SHARED_STRINGS_XML_FILE_FIRST_PART_HEADER = <<<EOD
+    const SHARED_STRINGS_XML_FILE_FIRST_PART_HEADER = <<<'EOD'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
 EOD;
@@ -48,15 +46,15 @@ EOD;
         $header = self::SHARED_STRINGS_XML_FILE_FIRST_PART_HEADER . ' ' . self::DEFAULT_STRINGS_COUNT_PART . '>';
         fwrite($this->sharedStringsFilePointer, $header);
 
-        /** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
+        /* @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
         $this->stringsEscaper = \Box\Spout\Common\Escaper\XLSX::getInstance();
     }
 
     /**
      * Checks if the book has been created. Throws an exception if not created yet.
      *
-     * @return void
      * @throws \Box\Spout\Common\Exception\IOException If the sheet data file cannot be opened for writing
+     * @return void
      */
     protected function throwIfSharedStringsFilePointerIsNotAvailable()
     {

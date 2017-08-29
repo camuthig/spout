@@ -4,16 +4,14 @@ namespace Box\Spout\Writer\Common\Internal;
 
 /**
  * Interface WorkbookInterface
- *
- * @package Box\Spout\Writer\Common\Internal
  */
 interface WorkbookInterface
 {
     /**
      * Creates a new sheet in the workbook. The current sheet remains unchanged.
      *
-     * @return WorksheetInterface The created sheet
      * @throws \Box\Spout\Common\Exception\IOException If unable to open the sheet for writing
+     * @return WorksheetInterface The created sheet
      */
     public function addNewSheet();
 
@@ -21,8 +19,8 @@ interface WorkbookInterface
      * Creates a new sheet in the workbook and make it the current sheet.
      * The writing will resume where it stopped (i.e. data won't be truncated).
      *
-     * @return WorksheetInterface The created sheet
      * @throws \Box\Spout\Common\Exception\IOException If unable to open the sheet for writing
+     * @return WorksheetInterface The created sheet
      */
     public function addNewSheetAndMakeItCurrent();
 
@@ -43,8 +41,8 @@ interface WorkbookInterface
      * The writing will resume where it stopped (i.e. data won't be truncated).
      *
      * @param \Box\Spout\Writer\Common\Sheet $sheet The "external" sheet to set as current
-     * @return void
      * @throws \Box\Spout\Writer\Exception\SheetNotFoundException If the given sheet does not exist in the workbook
+     * @return void
      */
     public function setCurrentSheet($sheet);
 
@@ -56,9 +54,9 @@ interface WorkbookInterface
      * @param array $dataRow Array containing data to be written.
      *          Example $dataRow = ['data1', 1234, null, '', 'data5'];
      * @param \Box\Spout\Writer\Style\Style $style Style to be applied to the row.
-     * @return void
      * @throws \Box\Spout\Common\Exception\IOException If trying to create a new sheet and unable to open the sheet for writing
      * @throws \Box\Spout\Writer\Exception\WriterException If unable to write data
+     * @return void
      */
     public function addRowToCurrentWorksheet($dataRow, $style);
 

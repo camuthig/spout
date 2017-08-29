@@ -3,14 +3,11 @@
 namespace Box\Spout\Writer\ODS;
 
 use Box\Spout\Writer\AbstractMultiSheetsWriter;
-use Box\Spout\Writer\Common;
 use Box\Spout\Writer\ODS\Internal\Workbook;
 
 /**
  * Class Writer
  * This class provides base support to write data to ODS files
- *
- * @package Box\Spout\Writer\ODS
  */
 class Writer extends AbstractMultiSheetsWriter
 {
@@ -29,26 +26,27 @@ class Writer extends AbstractMultiSheetsWriter
      *
      * @api
      * @param string $tempFolder Temporary folder where the files to create the ODS will be stored
-     * @return Writer
      * @throws \Box\Spout\Writer\Exception\WriterAlreadyOpenedException If the writer was already opened
+     * @return Writer
      */
     public function setTempFolder($tempFolder)
     {
         $this->throwIfWriterAlreadyOpened('Writer must be configured before opening it.');
 
         $this->tempFolder = $tempFolder;
+
         return $this;
     }
 
     /**
      * Configures the write and sets the current sheet pointer to a new sheet.
      *
-     * @return void
      * @throws \Box\Spout\Common\Exception\IOException If unable to open the file for writing
+     * @return void
      */
     protected function openWriter()
     {
-        $tempFolder = ($this->tempFolder) ? : sys_get_temp_dir();
+        $tempFolder = ($this->tempFolder) ?: sys_get_temp_dir();
         $this->book = new Workbook($tempFolder, $this->shouldCreateNewSheetsAutomatically, $this->defaultRowStyle);
         $this->book->addNewSheetAndMakeItCurrent();
     }
@@ -69,9 +67,9 @@ class Writer extends AbstractMultiSheetsWriter
      * @param array $dataRow Array containing data to be written.
      *          Example $dataRow = ['data1', 1234, null, '', 'data5'];
      * @param \Box\Spout\Writer\Style\Style $style Style to be applied to the row.
-     * @return void
      * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException If the book is not created yet
      * @throws \Box\Spout\Common\Exception\IOException If unable to write data
+     * @return void
      */
     protected function addRowToWriter(array $dataRow, $style)
     {

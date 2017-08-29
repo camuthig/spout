@@ -6,8 +6,6 @@ use Box\Spout\Reader\SheetInterface;
 
 /**
  * Class Sheet
- *
- * @package Box\Spout\Reader\CSV
  */
 class Sheet implements SheetInterface
 {

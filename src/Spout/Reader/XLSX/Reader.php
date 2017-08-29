@@ -9,8 +9,6 @@ use Box\Spout\Reader\XLSX\Helper\SharedStringsHelper;
 /**
  * Class Reader
  * This class provides support to read data from a XLSX file
- *
- * @package Box\Spout\Reader\XLSX
  */
 class Reader extends AbstractReader
 {
@@ -23,7 +21,6 @@ class Reader extends AbstractReader
     /** @var SheetIterator To iterator over the XLSX sheets */
     protected $sheetIterator;
 
-
     /**
      * Returns the reader's current options
      *
@@ -34,6 +31,7 @@ class Reader extends AbstractReader
         if (!isset($this->options)) {
             $this->options = new ReaderOptions();
         }
+
         return $this->options;
     }
 
@@ -44,6 +42,7 @@ class Reader extends AbstractReader
     public function setTempFolder($tempFolder)
     {
         $this->getOptions()->setTempFolder($tempFolder);
+
         return $this;
     }
 
@@ -63,9 +62,9 @@ class Reader extends AbstractReader
      * and fetches all the available sheets.
      *
      * @param  string $filePath Path of the file to be read
-     * @return void
      * @throws \Box\Spout\Common\Exception\IOException If the file at the given path or its content cannot be read
      * @throws \Box\Spout\Reader\Exception\NoSheetsFoundException If there are no sheets in the file
+     * @return void
      */
     protected function openReader($filePath)
     {

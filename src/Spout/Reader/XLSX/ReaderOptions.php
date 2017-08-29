@@ -5,13 +5,11 @@ namespace Box\Spout\Reader\XLSX;
 /**
  * Class ReaderOptions
  * This class is used to customize the reader's behavior
- *
- * @package Box\Spout\Reader\XLSX
  */
 class ReaderOptions extends \Box\Spout\Reader\Common\ReaderOptions
 {
     /** @var string|null Temporary folder where the temporary files will be created */
-    protected $tempFolder = null;
+    protected $tempFolder;
 
     /**
      * @return string|null Temporary folder where the temporary files will be created
@@ -28,6 +26,7 @@ class ReaderOptions extends \Box\Spout\Reader\Common\ReaderOptions
     public function setTempFolder($tempFolder)
     {
         $this->tempFolder = $tempFolder;
+
         return $this;
     }
 }

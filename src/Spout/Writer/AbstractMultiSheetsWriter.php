@@ -7,7 +7,6 @@ use Box\Spout\Writer\Exception\WriterNotOpenedException;
 /**
  * Class AbstractMultiSheetsWriter
  *
- * @package Box\Spout\Writer
  * @abstract
  */
 abstract class AbstractMultiSheetsWriter extends AbstractWriter
@@ -26,14 +25,15 @@ abstract class AbstractMultiSheetsWriter extends AbstractWriter
      *
      * @api
      * @param bool $shouldCreateNewSheetsAutomatically Whether new sheets should be automatically created when the max rows limit per sheet is reached
-     * @return AbstractMultiSheetsWriter
      * @throws \Box\Spout\Writer\Exception\WriterAlreadyOpenedException If the writer was already opened
+     * @return AbstractMultiSheetsWriter
      */
     public function setShouldCreateNewSheetsAutomatically($shouldCreateNewSheetsAutomatically)
     {
         $this->throwIfWriterAlreadyOpened('Writer must be configured before opening it.');
 
         $this->shouldCreateNewSheetsAutomatically = $shouldCreateNewSheetsAutomatically;
+
         return $this;
     }
 
@@ -41,8 +41,8 @@ abstract class AbstractMultiSheetsWriter extends AbstractWriter
      * Returns all the workbook's sheets
      *
      * @api
-     * @return Common\Sheet[] All the workbook's sheets
      * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException If the writer has not been opened yet
+     * @return Common\Sheet[] All the workbook's sheets
      */
     public function getSheets()
     {
@@ -63,8 +63,8 @@ abstract class AbstractMultiSheetsWriter extends AbstractWriter
      * Creates a new sheet and make it the current sheet. The data will now be written to this sheet.
      *
      * @api
-     * @return Common\Sheet The created sheet
      * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException If the writer has not been opened yet
+     * @return Common\Sheet The created sheet
      */
     public function addNewSheetAndMakeItCurrent()
     {
@@ -78,12 +78,13 @@ abstract class AbstractMultiSheetsWriter extends AbstractWriter
      * Returns the current sheet
      *
      * @api
-     * @return Common\Sheet The current sheet
      * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException If the writer has not been opened yet
+     * @return Common\Sheet The current sheet
      */
     public function getCurrentSheet()
     {
         $this->throwIfBookIsNotAvailable();
+
         return $this->getWorkbook()->getCurrentWorksheet()->getExternalSheet();
     }
 
@@ -93,9 +94,9 @@ abstract class AbstractMultiSheetsWriter extends AbstractWriter
      *
      * @api
      * @param Common\Sheet $sheet The sheet to set as current
-     * @return void
      * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException If the writer has not been opened yet
      * @throws \Box\Spout\Writer\Exception\SheetNotFoundException If the given sheet does not exist in the workbook
+     * @return void
      */
     public function setCurrentSheet($sheet)
     {
@@ -106,8 +107,8 @@ abstract class AbstractMultiSheetsWriter extends AbstractWriter
     /**
      * Checks if the book has been created. Throws an exception if not created yet.
      *
-     * @return void
      * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException If the book is not created yet
+     * @return void
      */
     protected function throwIfBookIsNotAvailable()
     {
@@ -116,4 +117,3 @@ abstract class AbstractMultiSheetsWriter extends AbstractWriter
         }
     }
 }
-

@@ -11,8 +11,6 @@ use Box\Spout\Reader\XLSX\Helper\SharedStringsCaching\CachingStrategyInterface;
 /**
  * Class SharedStringsHelper
  * This class provides helper functions for reading sharedStrings XML file
- *
- * @package Box\Spout\Reader\XLSX\Helper
  */
 class SharedStringsHelper
 {
@@ -81,8 +79,8 @@ class SharedStringsHelper
      * The XML file can be really big with sheets containing a lot of data. That is why
      * we need to use a XML reader that provides streaming like the XMLReader library.
      *
-     * @return void
      * @throws \Box\Spout\Common\Exception\IOException If sharedStrings.xml can't be read
+     * @return void
      */
     public function extractSharedStrings()
     {
@@ -108,7 +106,6 @@ class SharedStringsHelper
             }
 
             $this->cachingStrategy->closeCache();
-
         } catch (XMLProcessingException $exception) {
             throw new IOException("The sharedStrings.xml file is invalid and cannot be read. [{$exception->getMessage()}]");
         }
@@ -120,8 +117,8 @@ class SharedStringsHelper
      * Returns the shared strings unique count, as specified in <sst> tag.
      *
      * @param \Box\Spout\Reader\Wrapper\XMLReader $xmlReader XMLReader instance
-     * @return int|null Number of unique shared strings in the sharedStrings.xml file
      * @throws \Box\Spout\Common\Exception\IOException If sharedStrings.xml is invalid and can't be read
+     * @return int|null Number of unique shared strings in the sharedStrings.xml file
      */
     protected function getSharedStringsUniqueCount($xmlReader)
     {
@@ -140,7 +137,7 @@ class SharedStringsHelper
             $uniqueCount = $xmlReader->getAttribute(self::XML_ATTRIBUTE_COUNT);
         }
 
-        return ($uniqueCount !== null) ? intval($uniqueCount) : null;
+        return ($uniqueCount !== null) ? (int) $uniqueCount : null;
     }
 
     /**
@@ -193,6 +190,7 @@ class SharedStringsHelper
     protected function shouldExtractTextNodeValue($textNode)
     {
         $parentTagName = $textNode->parentNode->localName;
+
         return ($parentTagName === self::XML_NODE_SI || $parentTagName === self::XML_NODE_R);
     }
 
@@ -205,6 +203,7 @@ class SharedStringsHelper
     protected function shouldPreserveWhitespace($textNode)
     {
         $spaceValue = $textNode->getAttribute(self::XML_ATTRIBUTE_XML_SPACE);
+
         return ($spaceValue === self::XML_ATTRIBUTE_VALUE_PRESERVE);
     }
 
@@ -212,8 +211,8 @@ class SharedStringsHelper
      * Returns the shared string at the given index, using the previously chosen caching strategy.
      *
      * @param int $sharedStringIndex Index of the shared string in the sharedStrings.xml file
-     * @return string The shared string at the given index
      * @throws \Box\Spout\Reader\Exception\SharedStringNotFoundException If no shared string found for the given index
+     * @return string The shared string at the given index
      */
     public function getStringAtIndex($sharedStringIndex)
     {

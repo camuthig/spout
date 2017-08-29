@@ -2,14 +2,12 @@
 
 namespace Box\Spout\Reader\CSV;
 
-use Box\Spout\Reader\AbstractReader;
 use Box\Spout\Common\Exception\IOException;
+use Box\Spout\Reader\AbstractReader;
 
 /**
  * Class Reader
  * This class provides support to read data from a CSV file.
- *
- * @package Box\Spout\Reader\CSV
  */
 class Reader extends AbstractReader
 {
@@ -32,6 +30,7 @@ class Reader extends AbstractReader
         if (!isset($this->options)) {
             $this->options = new ReaderOptions();
         }
+
         return $this->options;
     }
 
@@ -45,6 +44,7 @@ class Reader extends AbstractReader
     public function setFieldDelimiter($fieldDelimiter)
     {
         $this->getOptions()->setFieldDelimiter($fieldDelimiter);
+
         return $this;
     }
 
@@ -58,6 +58,7 @@ class Reader extends AbstractReader
     public function setFieldEnclosure($fieldEnclosure)
     {
         $this->getOptions()->setFieldEnclosure($fieldEnclosure);
+
         return $this;
     }
 
@@ -71,6 +72,7 @@ class Reader extends AbstractReader
     public function setEncoding($encoding)
     {
         $this->getOptions()->setEncoding($encoding);
+
         return $this;
     }
 
@@ -84,6 +86,7 @@ class Reader extends AbstractReader
     public function setEndOfLineCharacter($endOfLineCharacter)
     {
         $this->getOptions()->setEndOfLineCharacter($endOfLineCharacter);
+
         return $this;
     }
 
@@ -102,8 +105,8 @@ class Reader extends AbstractReader
      * If setEncoding() was not called, it assumes that the file is encoded in UTF-8.
      *
      * @param  string $filePath Path of the CSV file to be read
-     * @return void
      * @throws \Box\Spout\Common\Exception\IOException
+     * @return void
      */
     protected function openReader($filePath)
     {
@@ -131,7 +134,6 @@ class Reader extends AbstractReader
     {
         return $this->sheetIterator;
     }
-
 
     /**
      * Closes the reader. To be used after reading the file.

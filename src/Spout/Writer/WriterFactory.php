@@ -10,8 +10,6 @@ use Box\Spout\Common\Type;
  * Class WriterFactory
  * This factory is used to create writers, based on the type of the file to be read.
  * It supports CSV, XLSX and ODS formats.
- *
- * @package Box\Spout\Writer
  */
 class WriterFactory
 {
@@ -20,8 +18,8 @@ class WriterFactory
      *
      * @api
      * @param  string $writerType Type of the writer to instantiate
-     * @return WriterInterface
      * @throws \Box\Spout\Common\Exception\UnsupportedTypeException
+     * @return WriterInterface
      */
     public static function create($writerType)
     {

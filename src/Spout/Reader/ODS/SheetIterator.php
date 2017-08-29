@@ -11,8 +11,6 @@ use Box\Spout\Reader\Wrapper\XMLReader;
 /**
  * Class SheetIterator
  * Iterate over ODS sheet.
- *
- * @package Box\Spout\Reader\ODS
  */
 class SheetIterator implements IteratorInterface
 {
@@ -54,7 +52,7 @@ class SheetIterator implements IteratorInterface
         $this->options = $options;
         $this->xmlReader = new XMLReader();
 
-        /** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
+        /* @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
         $this->escaper = \Box\Spout\Common\Escaper\ODS::getInstance();
 
         $settingsHelper = new SettingsHelper();
@@ -63,10 +61,10 @@ class SheetIterator implements IteratorInterface
 
     /**
      * Rewind the Iterator to the first element
-     * @link http://php.net/manual/en/iterator.rewind.php
+     * @see http://php.net/manual/en/iterator.rewind.php
      *
-     * @return void
      * @throws \Box\Spout\Common\Exception\IOException If unable to open the XML file containing sheets' data
+     * @return void
      */
     public function rewind()
     {
@@ -80,15 +78,15 @@ class SheetIterator implements IteratorInterface
         try {
             $this->hasFoundSheet = $this->xmlReader->readUntilNodeFound(self::XML_NODE_TABLE);
         } catch (XMLProcessingException $exception) {
-           throw new IOException("The content.xml file is invalid and cannot be read. [{$exception->getMessage()}]");
-       }
+            throw new IOException("The content.xml file is invalid and cannot be read. [{$exception->getMessage()}]");
+        }
 
         $this->currentSheetIndex = 0;
     }
 
     /**
      * Checks if current position is valid
-     * @link http://php.net/manual/en/iterator.valid.php
+     * @see http://php.net/manual/en/iterator.valid.php
      *
      * @return bool
      */
@@ -99,7 +97,7 @@ class SheetIterator implements IteratorInterface
 
     /**
      * Move forward to next element
-     * @link http://php.net/manual/en/iterator.next.php
+     * @see http://php.net/manual/en/iterator.next.php
      *
      * @return void
      */
@@ -114,7 +112,7 @@ class SheetIterator implements IteratorInterface
 
     /**
      * Return the current element
-     * @link http://php.net/manual/en/iterator.current.php
+     * @see http://php.net/manual/en/iterator.current.php
      *
      * @return \Box\Spout\Reader\ODS\Sheet
      */
@@ -133,6 +131,7 @@ class SheetIterator implements IteratorInterface
      * @param string $sheetName Name of the current sheet
      * @param int $sheetIndex Index of the current sheet
      * @param string|null Name of the sheet that was defined as active or NULL if none defined
+     * @param mixed $activeSheetName
      * @return bool Whether the current sheet was defined as the active one
      */
     private function isActiveSheet($sheetName, $sheetIndex, $activeSheetName)
@@ -147,7 +146,7 @@ class SheetIterator implements IteratorInterface
 
     /**
      * Return the key of the current element
-     * @link http://php.net/manual/en/iterator.key.php
+     * @see http://php.net/manual/en/iterator.key.php
      *
      * @return int
      */

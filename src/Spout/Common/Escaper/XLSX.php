@@ -7,8 +7,6 @@ use Box\Spout\Common\Singleton;
 /**
  * Class XLSX
  * Provides functions to escape and unescape data for XLSX files
- *
- * @package Box\Spout\Common\Escaper
  */
 class XLSX implements EscaperInterface
 {
@@ -88,7 +86,7 @@ class XLSX implements EscaperInterface
      * "\t", "\r" and "\n" don't need to be escaped.
      *
      * NOTE: the logic has been adapted from the XlsxWriter library (BSD License)
-     * @link https://github.com/jmcnamara/XlsxWriter/blob/f1e610f29/xlsxwriter/sharedstrings.py#L89
+     * @see https://github.com/jmcnamara/XlsxWriter/blob/f1e610f29/xlsxwriter/sharedstrings.py#L89
      *
      * @return string[]
      */
@@ -101,7 +99,7 @@ class XLSX implements EscaperInterface
             $character = chr($charValue);
             if (preg_match("/{$this->escapableControlCharactersPattern}/", $character)) {
                 $charHexValue = dechex($charValue);
-                $escapedChar = '_x' . sprintf('%04s' , strtoupper($charHexValue)) . '_';
+                $escapedChar = '_x' . sprintf('%04s', strtoupper($charHexValue)) . '_';
                 $controlCharactersEscapingMap[$escapedChar] = $character;
             }
         }
@@ -117,7 +115,7 @@ class XLSX implements EscaperInterface
      * So "\0" -> _x0000_ and "_x0000_" -> _x005F_x0000_.
      *
      * NOTE: the logic has been adapted from the XlsxWriter library (BSD License)
-     * @link https://github.com/jmcnamara/XlsxWriter/blob/f1e610f29/xlsxwriter/sharedstrings.py#L89
+     * @see https://github.com/jmcnamara/XlsxWriter/blob/f1e610f29/xlsxwriter/sharedstrings.py#L89
      *
      * @param string $string String to escape
      * @return string
@@ -131,7 +129,7 @@ class XLSX implements EscaperInterface
             return $escapedString;
         }
 
-        return preg_replace_callback("/({$this->escapableControlCharactersPattern})/", function($matches) {
+        return preg_replace_callback("/({$this->escapableControlCharactersPattern})/", function ($matches) {
             return $this->controlCharactersEscapingReverseMap[$matches[0]];
         }, $escapedString);
     }
@@ -155,7 +153,7 @@ class XLSX implements EscaperInterface
      * So "_x0000_" -> "\0" and "_x005F_x0000_" -> "_x0000_"
      *
      * NOTE: the logic has been adapted from the XlsxWriter library (BSD License)
-     * @link https://github.com/jmcnamara/XlsxWriter/blob/f1e610f29/xlsxwriter/sharedstrings.py#L89
+     * @see https://github.com/jmcnamara/XlsxWriter/blob/f1e610f29/xlsxwriter/sharedstrings.py#L89
      *
      * @param string $string String to unescape
      * @return string

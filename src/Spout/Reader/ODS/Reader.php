@@ -8,8 +8,6 @@ use Box\Spout\Reader\AbstractReader;
 /**
  * Class Reader
  * This class provides support to read data from a ODS file
- *
- * @package Box\Spout\Reader\ODS
  */
 class Reader extends AbstractReader
 {
@@ -29,6 +27,7 @@ class Reader extends AbstractReader
         if (!isset($this->options)) {
             $this->options = new ReaderOptions();
         }
+
         return $this->options;
     }
 
@@ -46,9 +45,9 @@ class Reader extends AbstractReader
      * Opens the file at the given file path to make it ready to be read.
      *
      * @param  string $filePath Path of the file to be read
-     * @return void
      * @throws \Box\Spout\Common\Exception\IOException If the file at the given path or its content cannot be read
      * @throws \Box\Spout\Reader\Exception\NoSheetsFoundException If there are no sheets in the file
+     * @return void
      */
     protected function openReader($filePath)
     {

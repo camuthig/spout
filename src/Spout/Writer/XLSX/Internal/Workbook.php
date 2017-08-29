@@ -3,17 +3,15 @@
 namespace Box\Spout\Writer\XLSX\Internal;
 
 use Box\Spout\Writer\Common\Internal\AbstractWorkbook;
+use Box\Spout\Writer\Common\Sheet;
 use Box\Spout\Writer\XLSX\Helper\FileSystemHelper;
 use Box\Spout\Writer\XLSX\Helper\SharedStringsHelper;
 use Box\Spout\Writer\XLSX\Helper\StyleHelper;
-use Box\Spout\Writer\Common\Sheet;
 
 /**
  * Class Workbook
  * Represents a workbook within a XLSX file.
  * It provides the functions to work with worksheets.
- *
- * @package Box\Spout\Writer\XLSX\Internal
  */
 class Workbook extends AbstractWorkbook
 {
@@ -77,8 +75,8 @@ class Workbook extends AbstractWorkbook
     /**
      * Creates a new sheet in the workbook. The current sheet remains unchanged.
      *
-     * @return Worksheet The created sheet
      * @throws \Box\Spout\Common\Exception\IOException If unable to open the sheet for writing
+     * @return Worksheet The created sheet
      */
     public function addNewSheet()
     {

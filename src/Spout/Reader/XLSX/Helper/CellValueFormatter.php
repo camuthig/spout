@@ -5,8 +5,6 @@ namespace Box\Spout\Reader\XLSX\Helper;
 /**
  * Class CellValueFormatter
  * This class provides helper functions to format cell values
- *
- * @package Box\Spout\Reader\XLSX\Helper
  */
 class CellValueFormatter
 {
@@ -61,7 +59,7 @@ class CellValueFormatter
         $this->styleHelper = $styleHelper;
         $this->shouldFormatDates = $shouldFormatDates;
 
-        /** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
+        /* @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
         $this->escaper = \Box\Spout\Common\Escaper\XLSX::getInstance();
     }
 
@@ -75,7 +73,7 @@ class CellValueFormatter
     {
         // Default cell type is "n"
         $cellType = $node->getAttribute(self::XML_ATTRIBUTE_TYPE) ?: self::CELL_TYPE_NUMERIC;
-        $cellStyleId = intval($node->getAttribute(self::XML_ATTRIBUTE_STYLE_ID));
+        $cellStyleId = (int) ($node->getAttribute(self::XML_ATTRIBUTE_STYLE_ID));
         $vNodeValue = $this->getVNodeValue($node);
 
         if (($vNodeValue === '') && ($cellType !== self::CELL_TYPE_INLINE_STRING)) {
@@ -111,6 +109,7 @@ class CellValueFormatter
         // for cell types having a "v" tag containing the value.
         // if not, the returned value should be empty string.
         $vNode = $node->getElementsByTagName(self::XML_NODE_VALUE)->item(0);
+
         return ($vNode !== null) ? $vNode->nodeValue : '';
     }
 
@@ -126,6 +125,7 @@ class CellValueFormatter
         // <c r="A1" t="inlineStr"><is><t>[INLINE_STRING]</t></is></c>
         $tNode = $node->getElementsByTagName(self::XML_NODE_INLINE_STRING_VALUE)->item(0);
         $cellValue = $this->escaper->unescape($tNode->nodeValue);
+
         return $cellValue;
     }
 
@@ -139,9 +139,10 @@ class CellValueFormatter
     {
         // shared strings are formatted this way:
         // <c r="A1" t="s"><v>[SHARED_STRING_INDEX]</v></c>
-        $sharedStringIndex = intval($nodeValue);
+        $sharedStringIndex = (int) $nodeValue;
         $escapedCellValue = $this->sharedStringsHelper->getStringAtIndex($sharedStringIndex);
         $cellValue = $this->escaper->unescape($escapedCellValue);
+
         return $cellValue;
     }
 
@@ -155,6 +156,7 @@ class CellValueFormatter
     {
         $escapedCellValue = trim($nodeValue);
         $cellValue = $this->escaper->unescape($escapedCellValue);
+
         return $cellValue;
     }
 
@@ -173,10 +175,11 @@ class CellValueFormatter
         $shouldFormatAsDate = $this->styleHelper->shouldFormatNumericValueAsDate($cellStyleId);
 
         if ($shouldFormatAsDate) {
-            return $this->formatExcelTimestampValue(floatval($nodeValue), $cellStyleId);
+            return $this->formatExcelTimestampValue((float) $nodeValue, $cellStyleId);
         } else {
-            $nodeIntValue = intval($nodeValue);
-            return ($nodeIntValue == $nodeValue) ? $nodeIntValue : floatval($nodeValue);
+            $nodeIntValue = (int) $nodeValue;
+
+            return ($nodeIntValue === $nodeValue) ? $nodeIntValue : (float) $nodeValue;
         }
     }
 
@@ -199,7 +202,8 @@ class CellValueFormatter
         if ($nodeValue >= 1) {
             // Values greater than 1 represent "dates". The value 1.0 representing the "base" date: 1900-01-01.
             return $this->formatExcelTimestampValueAsDateValue($nodeValue, $cellStyleId);
-        } else if ($nodeValue >= 0) {
+        }
+        if ($nodeValue >= 0) {
             // Values between 0 and 1 represent "times".
             return $this->formatExcelTimestampValueAsTimeValue($nodeValue, $cellStyleId);
         } else {
@@ -230,6 +234,7 @@ class CellValueFormatter
         if ($this->shouldFormatDates) {
             $styleNumberFormatCode = $this->styleHelper->getNumberFormatCode($cellStyleId);
             $phpDateFormat = DateFormatHelper::toPHPDateFormat($styleNumberFormatCode);
+
             return $dateObj->format($phpDateFormat);
         } else {
             return $dateObj;
@@ -253,12 +258,13 @@ class CellValueFormatter
 
         try {
             $dateObj = \DateTime::createFromFormat('|Y-m-d', '1899-12-31');
-            $dateObj->modify('+' . intval($nodeValue) . 'days');
+            $dateObj->modify('+' . (int) $nodeValue . 'days');
             $dateObj->modify('+' . $secondsRemainder . 'seconds');
 
             if ($this->shouldFormatDates) {
                 $styleNumberFormatCode = $this->styleHelper->getNumberFormatCode($cellStyleId);
                 $phpDateFormat = DateFormatHelper::toPHPDateFormat($styleNumberFormatCode);
+
                 return $dateObj->format($phpDateFormat);
             } else {
                 return $dateObj;
@@ -277,7 +283,8 @@ class CellValueFormatter
     protected function formatBooleanCellValue($nodeValue)
     {
         // !! is similar to boolval()
-        $cellValue = !!$nodeValue;
+        $cellValue = (bool) $nodeValue;
+
         return $cellValue;
     }
 

@@ -7,8 +7,6 @@ use Box\Spout\Common\Helper\EncodingHelper;
 /**
  * Class ReaderOptions
  * This class is used to customize the reader's behavior
- *
- * @package Box\Spout\Reader\CSV
  */
 class ReaderOptions extends \Box\Spout\Reader\Common\ReaderOptions
 {
@@ -42,6 +40,7 @@ class ReaderOptions extends \Box\Spout\Reader\Common\ReaderOptions
     public function setFieldDelimiter($fieldDelimiter)
     {
         $this->fieldDelimiter = $fieldDelimiter;
+
         return $this;
     }
 
@@ -63,6 +62,7 @@ class ReaderOptions extends \Box\Spout\Reader\Common\ReaderOptions
     public function setFieldEnclosure($fieldEnclosure)
     {
         $this->fieldEnclosure = $fieldEnclosure;
+
         return $this;
     }
 
@@ -84,6 +84,7 @@ class ReaderOptions extends \Box\Spout\Reader\Common\ReaderOptions
     public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
+
         return $this;
     }
 
@@ -105,6 +106,7 @@ class ReaderOptions extends \Box\Spout\Reader\Common\ReaderOptions
     public function setEndOfLineCharacter($endOfLineCharacter)
     {
         $this->endOfLineCharacter = $endOfLineCharacter;
+
         return $this;
     }
 }

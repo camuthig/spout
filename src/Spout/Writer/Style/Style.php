@@ -5,8 +5,6 @@ namespace Box\Spout\Writer\Style;
 /**
  * Class Style
  * Represents a style to be applied to a cell
- *
- * @package Box\Spout\Writer\Style
  */
 class Style
 {
@@ -16,7 +14,7 @@ class Style
     const DEFAULT_FONT_NAME = 'Arial';
 
     /** @var int|null Style ID */
-    protected $id = null;
+    protected $id;
 
     /** @var bool Whether the font should be bold */
     protected $fontBold = false;
@@ -64,7 +62,7 @@ class Style
     /**
      * @var Border
      */
-    protected $border = null;
+    protected $border;
 
     /**
      * @var bool Whether border properties should be applied
@@ -72,11 +70,10 @@ class Style
     protected $shouldApplyBorder = false;
 
     /** @var string Background color */
-    protected $backgroundColor = null;
+    protected $backgroundColor;
 
     /** @var bool */
     protected $hasSetBackgroundColor = false;
-
 
     /**
      * @return int|null
@@ -93,6 +90,7 @@ class Style
     public function setId($id)
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -112,6 +110,7 @@ class Style
     {
         $this->shouldApplyBorder = true;
         $this->border = $border;
+
         return $this;
     }
 
@@ -139,6 +138,7 @@ class Style
         $this->fontBold = true;
         $this->hasSetFontBold = true;
         $this->shouldApplyFont = true;
+
         return $this;
     }
 
@@ -158,6 +158,7 @@ class Style
         $this->fontItalic = true;
         $this->hasSetFontItalic = true;
         $this->shouldApplyFont = true;
+
         return $this;
     }
 
@@ -177,6 +178,7 @@ class Style
         $this->fontUnderline = true;
         $this->hasSetFontUnderline = true;
         $this->shouldApplyFont = true;
+
         return $this;
     }
 
@@ -196,6 +198,7 @@ class Style
         $this->fontStrikethrough = true;
         $this->hasSetFontStrikethrough = true;
         $this->shouldApplyFont = true;
+
         return $this;
     }
 
@@ -216,6 +219,7 @@ class Style
         $this->fontSize = $fontSize;
         $this->hasSetFontSize = true;
         $this->shouldApplyFont = true;
+
         return $this;
     }
 
@@ -238,6 +242,7 @@ class Style
         $this->fontColor = $fontColor;
         $this->hasSetFontColor = true;
         $this->shouldApplyFont = true;
+
         return $this;
     }
 
@@ -258,6 +263,7 @@ class Style
         $this->fontName = $fontName;
         $this->hasSetFontName = true;
         $this->shouldApplyFont = true;
+
         return $this;
     }
 
@@ -277,6 +283,7 @@ class Style
     {
         $this->shouldWrapText = $shouldWrap;
         $this->hasSetWrapText = true;
+
         return $this;
     }
 
@@ -305,6 +312,7 @@ class Style
     {
         $this->hasSetBackgroundColor = true;
         $this->backgroundColor = $color;
+
         return $this;
     }
 
@@ -317,7 +325,6 @@ class Style
     }
 
     /**
-     *
      * @return bool Whether the background color should be applied
      */
     public function shouldApplyBackgroundColor()

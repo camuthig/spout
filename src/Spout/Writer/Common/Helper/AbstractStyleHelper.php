@@ -5,8 +5,6 @@ namespace Box\Spout\Writer\Common\Helper;
 /**
  * Class AbstractStyleHelper
  * This class provides helper functions to manage styles
- *
- * @package Box\Spout\Writer\Common\Helper
  */
 abstract class AbstractStyleHelper
 {
@@ -70,6 +68,7 @@ abstract class AbstractStyleHelper
     protected function getStyleFromSerializedStyle($serializedStyle)
     {
         $styleId = $this->serializedStyleToStyleIdMappingTable[$serializedStyle];
+
         return $this->styleIdToStyleMappingTable[$styleId];
     }
 
@@ -103,6 +102,7 @@ abstract class AbstractStyleHelper
     public function applyExtraStylesIfNeeded($style, $dataRow)
     {
         $updatedStyle = $this->applyWrapTextIfCellContainsNewLine($style, $dataRow);
+
         return $updatedStyle;
     }
 

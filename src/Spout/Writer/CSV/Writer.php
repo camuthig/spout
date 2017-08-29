@@ -2,15 +2,13 @@
 
 namespace Box\Spout\Writer\CSV;
 
-use Box\Spout\Writer\AbstractWriter;
 use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Common\Helper\EncodingHelper;
+use Box\Spout\Writer\AbstractWriter;
 
 /**
  * Class Writer
  * This class provides support to write data to CSV files
- *
- * @package Box\Spout\Writer\CSV
  */
 class Writer extends AbstractWriter
 {
@@ -42,6 +40,7 @@ class Writer extends AbstractWriter
     public function setFieldDelimiter($fieldDelimiter)
     {
         $this->fieldDelimiter = $fieldDelimiter;
+
         return $this;
     }
 
@@ -55,6 +54,7 @@ class Writer extends AbstractWriter
     public function setFieldEnclosure($fieldEnclosure)
     {
         $this->fieldEnclosure = $fieldEnclosure;
+
         return $this;
     }
 
@@ -67,6 +67,7 @@ class Writer extends AbstractWriter
     public function setShouldAddBOM($shouldAddBOM)
     {
         $this->shouldAddBOM = (bool) $shouldAddBOM;
+
         return $this;
     }
 
@@ -89,8 +90,8 @@ class Writer extends AbstractWriter
      * @param  array $dataRow Array containing data to be written.
      *          Example $dataRow = ['data1', 1234, null, '', 'data5'];
      * @param \Box\Spout\Writer\Style\Style $style Ignored here since CSV does not support styling.
-     * @return void
      * @throws \Box\Spout\Common\Exception\IOException If unable to write data
+     * @return void
      */
     protected function addRowToWriter(array $dataRow, $style)
     {

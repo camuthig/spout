@@ -8,8 +8,6 @@ use Box\Spout\Writer\Exception\InvalidSheetNameException;
 /**
  * Class Sheet
  * External representation of a worksheet
- *
- * @package Box\Spout\Writer\Common
  */
 class Sheet
 {
@@ -79,8 +77,8 @@ class Sheet
      *
      * @api
      * @param string $name Name of the sheet
-     * @return Sheet
      * @throws \Box\Spout\Writer\Exception\InvalidSheetNameException If the sheet's name is invalid.
+     * @return Sheet
      */
     public function setName($name)
     {
@@ -97,8 +95,8 @@ class Sheet
      * @see Sheet::setName for validity rules.
      *
      * @param string $name
-     * @return void
      * @throws \Box\Spout\Writer\Exception\InvalidSheetNameException If the sheet's name is invalid.
+     * @return void
      */
     protected function throwIfNameIsInvalid($name)
     {

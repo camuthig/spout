@@ -5,8 +5,6 @@ namespace Box\Spout\Writer\Common\Helper;
 /**
  * Class ZipHelper
  * This class provides helper functions to create zip files
- *
- * @package Box\Spout\Writer\Common\Helper
  */
 class ZipHelper
 {
@@ -42,7 +40,7 @@ class ZipHelper
             $this->zip = new \ZipArchive();
             $zipFilePath = $this->getZipFilePath();
 
-            $this->zip->open($zipFilePath, \ZipArchive::CREATE|\ZipArchive::OVERWRITE);
+            $this->zip->open($zipFilePath, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
         }
 
         return $this->zip;
@@ -184,6 +182,7 @@ class ZipHelper
     protected function getNormalizedRealPath($path)
     {
         $realPath = realpath($path);
+
         return str_replace(DIRECTORY_SEPARATOR, '/', $realPath);
     }
 

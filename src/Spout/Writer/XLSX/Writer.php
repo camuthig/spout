@@ -9,8 +9,6 @@ use Box\Spout\Writer\XLSX\Internal\Workbook;
 /**
  * Class Writer
  * This class provides base support to write data to XLSX files
- *
- * @package Box\Spout\Writer\XLSX
  */
 class Writer extends AbstractMultiSheetsWriter
 {
@@ -36,14 +34,15 @@ class Writer extends AbstractMultiSheetsWriter
      *
      * @api
      * @param string $tempFolder Temporary folder where the files to create the XLSX will be stored
-     * @return Writer
      * @throws \Box\Spout\Writer\Exception\WriterAlreadyOpenedException If the writer was already opened
+     * @return Writer
      */
     public function setTempFolder($tempFolder)
     {
         $this->throwIfWriterAlreadyOpened('Writer must be configured before opening it.');
 
         $this->tempFolder = $tempFolder;
+
         return $this;
     }
 
@@ -53,27 +52,28 @@ class Writer extends AbstractMultiSheetsWriter
      *
      * @api
      * @param bool $shouldUseInlineStrings Whether inline or shared strings should be used
-     * @return Writer
      * @throws \Box\Spout\Writer\Exception\WriterAlreadyOpenedException If the writer was already opened
+     * @return Writer
      */
     public function setShouldUseInlineStrings($shouldUseInlineStrings)
     {
         $this->throwIfWriterAlreadyOpened('Writer must be configured before opening it.');
 
         $this->shouldUseInlineStrings = $shouldUseInlineStrings;
+
         return $this;
     }
 
     /**
      * Configures the write and sets the current sheet pointer to a new sheet.
      *
-     * @return void
      * @throws \Box\Spout\Common\Exception\IOException If unable to open the file for writing
+     * @return void
      */
     protected function openWriter()
     {
         if (!$this->book) {
-            $tempFolder = ($this->tempFolder) ? : sys_get_temp_dir();
+            $tempFolder = ($this->tempFolder) ?: sys_get_temp_dir();
             $this->book = new Workbook($tempFolder, $this->shouldUseInlineStrings, $this->shouldCreateNewSheetsAutomatically, $this->defaultRowStyle);
             $this->book->addNewSheetAndMakeItCurrent();
         }
@@ -95,9 +95,9 @@ class Writer extends AbstractMultiSheetsWriter
      * @param array $dataRow Array containing data to be written.
      *          Example $dataRow = ['data1', 1234, null, '', 'data5'];
      * @param \Box\Spout\Writer\Style\Style $style Style to be applied to the row.
-     * @return void
      * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException If the book is not created yet
      * @throws \Box\Spout\Common\Exception\IOException If unable to write data
+     * @return void
      */
     protected function addRowToWriter(array $dataRow, $style)
     {

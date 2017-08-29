@@ -4,8 +4,6 @@ namespace Box\Spout\Reader\XLSX\Helper\SharedStringsCaching;
 
 /**
  * Class CachingStrategyFactory
- *
- * @package Box\Spout\Reader\XLSX\Helper\SharedStringsCaching
  */
 class CachingStrategyFactory
 {
@@ -68,7 +66,7 @@ class CachingStrategyFactory
     public static function getInstance()
     {
         if (self::$instance === null) {
-            self::$instance = new CachingStrategyFactory();
+            self::$instance = new self();
         }
 
         return self::$instance;
@@ -112,6 +110,7 @@ class CachingStrategyFactory
             return ($sharedStringsUniqueCount < self::MAX_NUM_STRINGS_PER_TEMP_FILE);
         } else {
             $memoryNeeded = $sharedStringsUniqueCount * self::AMOUNT_MEMORY_NEEDED_PER_STRING_IN_KB;
+
             return ($memoryAvailable > $memoryNeeded);
         }
     }
@@ -132,7 +131,7 @@ class CachingStrategyFactory
         }
 
         if (preg_match('/(\d+)([bkmgt])b?/', $memoryLimitFormatted, $matches)) {
-            $amount = intval($matches[1]);
+            $amount = (int) ($matches[1]);
             $unit = $matches[2];
 
             switch ($unit) {

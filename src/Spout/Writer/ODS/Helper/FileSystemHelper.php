@@ -9,8 +9,6 @@ use Box\Spout\Writer\ODS\Internal\Worksheet;
  * Class FileSystemHelper
  * This class provides helper functions to help with the file system operations
  * like files/folders creation & deletion for ODS files
- *
- * @package Box\Spout\Writer\ODS\Helper
  */
 class FileSystemHelper extends \Box\Spout\Common\Helper\FileSystemHelper
 {
@@ -54,8 +52,8 @@ class FileSystemHelper extends \Box\Spout\Common\Helper\FileSystemHelper
     /**
      * Creates all the folders needed to create a ODS file, as well as the files that won't change.
      *
-     * @return void
      * @throws \Box\Spout\Common\Exception\IOException If unable to create at least one of the base folders
+     * @return void
      */
     public function createBaseFilesAndFolders()
     {
@@ -70,20 +68,21 @@ class FileSystemHelper extends \Box\Spout\Common\Helper\FileSystemHelper
     /**
      * Creates the folder that will be used as root
      *
-     * @return FileSystemHelper
      * @throws \Box\Spout\Common\Exception\IOException If unable to create the folder
+     * @return FileSystemHelper
      */
     protected function createRootFolder()
     {
         $this->rootFolder = $this->createFolder($this->baseFolderRealPath, uniqid('ods'));
+
         return $this;
     }
 
     /**
      * Creates the "META-INF" folder under the root folder as well as the "manifest.xml" file in it
      *
-     * @return FileSystemHelper
      * @throws \Box\Spout\Common\Exception\IOException If unable to create the folder or the "manifest.xml" file
+     * @return FileSystemHelper
      */
     protected function createMetaInfoFolderAndFile()
     {
@@ -97,12 +96,12 @@ class FileSystemHelper extends \Box\Spout\Common\Helper\FileSystemHelper
     /**
      * Creates the "manifest.xml" file under the "META-INF" folder (under root)
      *
-     * @return FileSystemHelper
      * @throws \Box\Spout\Common\Exception\IOException If unable to create the file
+     * @return FileSystemHelper
      */
     protected function createManifestFile()
     {
-        $manifestXmlFileContents = <<<EOD
+        $manifestXmlFileContents = <<<'EOD'
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest:manifest xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0" manifest:version="1.2">
     <manifest:file-entry manifest:full-path="/" manifest:media-type="application/vnd.oasis.opendocument.spreadsheet"/>
@@ -121,20 +120,21 @@ EOD;
      * Creates the temp folder where specific sheets content will be written to.
      * This folder is not part of the final ODS file and is only used to be able to jump between sheets.
      *
-     * @return FileSystemHelper
      * @throws \Box\Spout\Common\Exception\IOException If unable to create the folder
+     * @return FileSystemHelper
      */
     protected function createSheetsContentTempFolder()
     {
         $this->sheetsContentTempFolder = $this->createFolder($this->rootFolder, self::SHEETS_CONTENT_TEMP_FOLDER_NAME);
+
         return $this;
     }
 
     /**
      * Creates the "meta.xml" file under the root folder
      *
-     * @return FileSystemHelper
      * @throws \Box\Spout\Common\Exception\IOException If unable to create the file
+     * @return FileSystemHelper
      */
     protected function createMetaFile()
     {
@@ -160,12 +160,13 @@ EOD;
     /**
      * Creates the "mimetype" file under the root folder
      *
-     * @return FileSystemHelper
      * @throws \Box\Spout\Common\Exception\IOException If unable to create the file
+     * @return FileSystemHelper
      */
     protected function createMimetypeFile()
     {
         $this->createFileWithContents($this->rootFolder, self::MIMETYPE_FILE_NAME, self::MIMETYPE);
+
         return $this;
     }
 
@@ -178,7 +179,7 @@ EOD;
      */
     public function createContentFile($worksheets, $styleHelper)
     {
-        $contentXmlFileContents = <<<EOD
+        $contentXmlFileContents = <<<'EOD'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <office:document-content office:version="1.2" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:msoxl="http://schemas.microsoft.com/office/excel/formula" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:xlink="http://www.w3.org/1999/xlink">
 EOD;
@@ -236,9 +237,9 @@ EOD;
     public function deleteWorksheetTempFolder()
     {
         $this->deleteFolderRecursively($this->sheetsContentTempFolder);
+
         return $this;
     }
-
 
     /**
      * Creates the "styles.xml" file under the root folder

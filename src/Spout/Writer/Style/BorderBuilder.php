@@ -26,6 +26,7 @@ class BorderBuilder
     public function setBorderTop($color = Color::BLACK, $width = Border::WIDTH_MEDIUM, $style = Border::STYLE_SOLID)
     {
         $this->border->addPart(new BorderPart(Border::TOP, $color, $width, $style));
+
         return $this;
     }
 
@@ -38,6 +39,7 @@ class BorderBuilder
     public function setBorderRight($color = Color::BLACK, $width = Border::WIDTH_MEDIUM, $style = Border::STYLE_SOLID)
     {
         $this->border->addPart(new BorderPart(Border::RIGHT, $color, $width, $style));
+
         return $this;
     }
 
@@ -50,6 +52,7 @@ class BorderBuilder
     public function setBorderBottom($color = Color::BLACK, $width = Border::WIDTH_MEDIUM, $style = Border::STYLE_SOLID)
     {
         $this->border->addPart(new BorderPart(Border::BOTTOM, $color, $width, $style));
+
         return $this;
     }
 
@@ -62,6 +65,7 @@ class BorderBuilder
     public function setBorderLeft($color = Color::BLACK, $width = Border::WIDTH_MEDIUM, $style = Border::STYLE_SOLID)
     {
         $this->border->addPart(new BorderPart(Border::LEFT, $color, $width, $style));
+
         return $this;
     }
 

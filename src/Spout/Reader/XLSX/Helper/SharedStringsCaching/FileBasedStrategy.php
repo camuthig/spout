@@ -12,8 +12,6 @@ use Box\Spout\Reader\Exception\SharedStringNotFoundException;
  * This class implements the file-based caching strategy for shared strings.
  * Shared strings are stored in small files (with a max number of strings per file).
  * This strategy is slower than an in-memory strategy but is used to avoid out of memory crashes.
- *
- * @package Box\Spout\Reader\XLSX\Helper\SharedStringsCaching
  */
 class FileBasedStrategy implements CachingStrategyInterface
 {
@@ -99,7 +97,8 @@ class FileBasedStrategy implements CachingStrategyInterface
      */
     protected function getSharedStringTempFilePath($sharedStringIndex)
     {
-        $numTempFile = intval($sharedStringIndex / $this->maxNumStringsPerTempFile);
+        $numTempFile = (int) ($sharedStringIndex / $this->maxNumStringsPerTempFile);
+
         return $this->tempFolder . '/sharedstrings' . $numTempFile;
     }
 
@@ -117,13 +116,12 @@ class FileBasedStrategy implements CachingStrategyInterface
         }
     }
 
-
     /**
      * Returns the string located at the given index from the cache.
      *
      * @param int $sharedStringIndex Index of the shared string in the sharedStrings.xml file
-     * @return string The shared string at the given index
      * @throws \Box\Spout\Reader\Exception\SharedStringNotFoundException If no shared string found for the given index
+     * @return string The shared string at the given index
      */
     public function getStringAtIndex($sharedStringIndex)
     {

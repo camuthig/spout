@@ -39,7 +39,7 @@ class BorderPart
         'solid',
         'dashed',
         'dotted',
-        'double'
+        'double',
     ];
 
     /**

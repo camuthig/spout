@@ -8,8 +8,6 @@ use Box\Spout\Reader\XLSX\Sheet;
 /**
  * Class SheetHelper
  * This class provides helper functions related to XLSX sheets
- *
- * @package Box\Spout\Reader\XLSX\Helper
  */
 class SheetHelper
 {
@@ -47,6 +45,7 @@ class SheetHelper
      * @param \Box\Spout\Reader\XLSX\ReaderOptions $options Reader's current options
      * @param \Box\Spout\Reader\XLSX\Helper\SharedStringsHelper Helper to work with shared strings
      * @param \Box\Spout\Common\Helper\GlobalFunctionsHelper $globalFunctionsHelper
+     * @param mixed $sharedStringsHelper
      */
     public function __construct($filePath, $options, $sharedStringsHelper, $globalFunctionsHelper)
     {
@@ -75,11 +74,11 @@ class SheetHelper
                     // The "workbookView" node is located before "sheet" nodes, ensuring that
                     // the active sheet is known before parsing sheets data.
                     $activeSheetIndex = (int) $xmlReader->getAttribute(self::XML_ATTRIBUTE_ACTIVE_TAB);
-                } else if ($xmlReader->isPositionedOnStartingNode(self::XML_NODE_SHEET)) {
+                } elseif ($xmlReader->isPositionedOnStartingNode(self::XML_NODE_SHEET)) {
                     $isSheetActive = ($sheetIndex === $activeSheetIndex);
                     $sheets[] = $this->getSheetFromSheetXMLNode($xmlReader, $sheetIndex, $isSheetActive);
                     $sheetIndex++;
-                } else if ($xmlReader->isPositionedOnEndingNode(self::XML_NODE_SHEETS)) {
+                } elseif ($xmlReader->isPositionedOnEndingNode(self::XML_NODE_SHEETS)) {
                     // stop reading once all sheets have been read
                     break;
                 }
@@ -113,9 +112,13 @@ class SheetHelper
         $sheetDataXMLFilePath = $this->getSheetDataXMLFilePathForSheetId($sheetId);
 
         return new Sheet(
-            $this->filePath, $sheetDataXMLFilePath,
-            $sheetIndexZeroBased, $sheetName, $isSheetActive,
-            $this->options, $this->sharedStringsHelper
+            $this->filePath,
+            $sheetDataXMLFilePath,
+            $sheetIndexZeroBased,
+            $sheetName,
+            $isSheetActive,
+            $this->options,
+            $this->sharedStringsHelper
         );
     }
 

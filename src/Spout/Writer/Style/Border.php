@@ -37,7 +37,7 @@ class Border
 
     /**
      * @param $name The name of the border part
-     * @return null|BorderPart
+     * @return BorderPart|null
      */
     public function getPart($name)
     {
@@ -80,6 +80,7 @@ class Border
     public function addPart(BorderPart $borderPart)
     {
         $this->parts[$borderPart->getName()] = $borderPart;
+
         return $this;
     }
 }

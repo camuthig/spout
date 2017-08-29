@@ -7,8 +7,6 @@ use Box\Spout\Common\Singleton;
 /**
  * Class ODS
  * Provides functions to escape and unescape data for ODS files
- *
- * @package Box\Spout\Common\Escaper
  */
 class ODS implements EscaperInterface
 {

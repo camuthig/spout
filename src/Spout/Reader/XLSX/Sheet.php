@@ -7,8 +7,6 @@ use Box\Spout\Reader\SheetInterface;
 /**
  * Class Sheet
  * Represents a sheet within a XLSX file
- *
- * @package Box\Spout\Reader\XLSX
  */
 class Sheet implements SheetInterface
 {
@@ -32,6 +30,7 @@ class Sheet implements SheetInterface
      * @param bool $isSheetActive Whether the sheet was defined as active
      * @param \Box\Spout\Reader\XLSX\ReaderOptions $options Reader's current options
      * @param Helper\SharedStringsHelper Helper to work with shared strings
+     * @param mixed $sharedStringsHelper
      */
     public function __construct($filePath, $sheetDataXMLFilePath, $sheetIndex, $sheetName, $isSheetActive, $options, $sharedStringsHelper)
     {

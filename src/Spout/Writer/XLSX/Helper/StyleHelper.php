@@ -9,8 +9,6 @@ use Box\Spout\Writer\Style\Style;
 /**
  * Class StyleHelper
  * This class provides helper functions to manage styles
- *
- * @package Box\Spout\Writer\XLSX\Helper
  */
 class StyleHelper extends AbstractStyleHelper
 {
@@ -53,6 +51,7 @@ class StyleHelper extends AbstractStyleHelper
         $registeredStyle = parent::registerStyle($style);
         $this->registerFill($registeredStyle);
         $this->registerBorder($registeredStyle);
+
         return $registeredStyle;
     }
 
@@ -81,7 +80,6 @@ class StyleHelper extends AbstractStyleHelper
                 $this->registeredFills[$backgroundColor] = $styleId;
                 $this->styleIdToFillMappingTable[$styleId] = $this->fillIndex++;
             }
-
         } else {
             // The fillId maps a style to a fill declaration
             // When there is no background color definition - we default to 0
@@ -112,13 +110,11 @@ class StyleHelper extends AbstractStyleHelper
                 $this->registeredBorders[$serializedBorder] = $styleId;
                 $this->styleIdToBorderMappingTable[$styleId] = count($this->registeredBorders);
             }
-
         } else {
             // If no border should be applied - the mapping is the default border: 0
             $this->styleIdToBorderMappingTable[$styleId] = 0;
         }
     }
-
 
     /**
      * For empty cells, we can specify a style or not. If no style are specified,
@@ -138,7 +134,6 @@ class StyleHelper extends AbstractStyleHelper
         return ($hasStyleCustomFill || $hasStyleCustomBorders);
     }
 
-
     /**
      * Returns the content of the "styles.xml" file, given a list of styles.
      *
@@ -146,7 +141,7 @@ class StyleHelper extends AbstractStyleHelper
      */
     public function getStylesXMLFileContent()
     {
-        $content = <<<EOD
+        $content = <<<'EOD'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
 EOD;
@@ -158,7 +153,7 @@ EOD;
         $content .= $this->getCellXfsSectionContent();
         $content .= $this->getCellStylesSectionContent();
 
-        $content .= <<<EOD
+        $content .= <<<'EOD'
 </styleSheet>
 EOD;
 
@@ -241,7 +236,6 @@ EOD;
      */
     protected function getBordersSectionContent()
     {
-
         // There is one default border with index 0
         $borderCount = count($this->registeredBorders) + 1;
 
@@ -265,7 +259,6 @@ EOD;
                     $part = $border->getPart($partName);
                     $content .= BorderHelper::serializeBorderPart($part);
                 }
-
             }
 
             $content .= '</border>';
@@ -283,7 +276,7 @@ EOD;
      */
     protected function getCellStyleXfsSectionContent()
     {
-        return <<<EOD
+        return <<<'EOD'
 <cellStyleXfs count="1">
     <xf borderId="0" fillId="0" fontId="0" numFmtId="0"/>
 </cellStyleXfs>
@@ -335,7 +328,7 @@ EOD;
      */
     protected function getCellStylesSectionContent()
     {
-        return <<<EOD
+        return <<<'EOD'
 <cellStyles count="1">
     <cellStyle builtinId="0" name="Normal" xfId="0"/>
 </cellStyles>

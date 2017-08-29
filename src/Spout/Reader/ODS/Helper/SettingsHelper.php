@@ -8,8 +8,6 @@ use Box\Spout\Reader\Wrapper\XMLReader;
 /**
  * Class SettingsHelper
  * This class provides helper functions to extract data from the "settings.xml" file.
- *
- * @package Box\Spout\Reader\ODS\Helper
  */
 class SettingsHelper
 {

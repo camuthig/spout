@@ -4,8 +4,6 @@ namespace Box\Spout\Common\Escaper;
 
 /**
  * Interface EscaperInterface
- *
- * @package Box\Spout\Common\Escaper
  */
 interface EscaperInterface
 {

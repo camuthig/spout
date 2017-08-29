@@ -5,8 +5,6 @@ namespace Box\Spout\Common;
 /**
  * Class Singleton
  * Defines a class as a singleton.
- *
- * @package Box\Spout\Common
  */
 trait Singleton
 {
@@ -19,7 +17,7 @@ trait Singleton
     {
         return isset(static::$instance)
             ? static::$instance
-            : static::$instance = new static;
+            : static::$instance = new static();
     }
 
     /**
@@ -34,8 +32,15 @@ trait Singleton
      * Initializes the singleton
      * @return void
      */
-    protected function init() {}
+    protected function init()
+    {
+    }
 
-    final private function __wakeup() {}
-    final private function __clone() {}
+    final private function __wakeup()
+    {
+    }
+
+    final private function __clone()
+    {
+    }
 }
