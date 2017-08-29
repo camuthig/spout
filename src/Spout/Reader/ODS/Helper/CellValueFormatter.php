@@ -142,10 +142,8 @@ class CellValueFormatter
     protected function formatBooleanCellValue($node)
     {
         $nodeValue = $node->getAttribute(self::XML_ATTRIBUTE_BOOLEAN_VALUE);
-        // !! is similar to boolval()
-        $cellValue = (bool) $nodeValue;
 
-        return $cellValue;
+        return (bool) $nodeValue;
     }
 
     /**
@@ -160,22 +158,23 @@ class CellValueFormatter
         // <table:table-cell calcext:value-type="date" office:date-value="2016-05-19T16:39:00" office:value-type="date">
         //   <text:p>05/19/16 04:39 PM</text:p>
         // </table:table-cell>
+        $cellValue = null;
 
         if ($this->shouldFormatDates) {
             // The date is already formatted in the "p" tag
             $nodeWithValueAlreadyFormatted = $node->getElementsByTagName(self::XML_NODE_P)->item(0);
-
-            return $nodeWithValueAlreadyFormatted->nodeValue;
+            $cellValue = $nodeWithValueAlreadyFormatted->nodeValue;
         } else {
             // otherwise, get it from the "date-value" attribute
             try {
                 $nodeValue = $node->getAttribute(self::XML_ATTRIBUTE_DATE_VALUE);
-
-                return new \DateTime($nodeValue);
+                $cellValue = new \DateTime($nodeValue);
             } catch (\Exception $e) {
-                return null;
+                // do nothing
             }
         }
+
+        return $cellValue;
     }
 
     /**
@@ -190,22 +189,23 @@ class CellValueFormatter
         // <table:table-cell calcext:value-type="time" office:time-value="PT13H24M00S" office:value-type="time">
         //   <text:p>01:24:00 PM</text:p>
         // </table:table-cell>
+        $cellValue = null;
 
         if ($this->shouldFormatDates) {
             // The date is already formatted in the "p" tag
             $nodeWithValueAlreadyFormatted = $node->getElementsByTagName(self::XML_NODE_P)->item(0);
-
-            return $nodeWithValueAlreadyFormatted->nodeValue;
+            $cellValue = $nodeWithValueAlreadyFormatted->nodeValue;
         } else {
             // otherwise, get it from the "time-value" attribute
             try {
                 $nodeValue = $node->getAttribute(self::XML_ATTRIBUTE_TIME_VALUE);
-
-                return new \DateInterval($nodeValue);
+                $cellValue = new \DateInterval($nodeValue);
             } catch (\Exception $e) {
-                return null;
+                // do nothing
             }
         }
+
+        return $cellValue;
     }
 
     /**
