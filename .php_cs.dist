@@ -1,6 +1,6 @@
 <?php
 
-return PhpCsFixer\Config::create()
+$config = PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules([
         '@Symfony' => true,
@@ -43,11 +43,16 @@ return PhpCsFixer\Config::create()
         'single_line_comment_style' => ['comment_types' => ['hash']],
         'strict_comparison' => true,
         'void_return' => true,
-    ])
-    ->setFinder(
-        PhpCsFixer\Finder::create()
-            ->exclude('vendor')
-            ->in(__DIR__)
-            ->name('*.php');
-    )
-;
+    ]);
+
+$config->setFinder(
+    PhpCsFixer\Finder::create()
+        ->exclude('vendor')
+        ->in(__DIR__)
+        ->name('*.php')
+);
+
+$cacheDir = getenv('TRAVIS') ? getenv('HOME') . '/.php-cs-fixer' : __DIR__;
+$config->setCacheFile($cacheDir . '/.php_cs.cache');
+
+return $config;

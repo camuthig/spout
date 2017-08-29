@@ -14,7 +14,7 @@ class Psr4Autoloader
      *
      * @var array
      */
-    protected $prefixes = [];
+    protected $prefixes = array();
 
     /**
      * Register loader with SPL autoloader stack.
